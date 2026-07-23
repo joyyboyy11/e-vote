@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#131f38">
+  <title>E‑Vote — Inscription électeur</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <main class="app container">
+    <header class="topbar">
+      <div class="brand">
+        <svg class="logo" width="42" height="42" viewBox="0 0 42 42" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="seal" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#c79c46"/>
+              <stop offset="1" stop-color="#8f6a24"/>
+            </linearGradient>
+          </defs>
+          <circle cx="21" cy="21" r="19" fill="url(#seal)"/>
+          <circle cx="21" cy="21" r="19" fill="none" stroke="#131f38" stroke-width="1" stroke-dasharray="2 3" opacity="0.5"/>
+          <path d="M13 22l6 6 10-13" fill="none" stroke="#131f38" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="brand-text">
+          <h1 class="product">E‑Vote</h1>
+          <p class="tagline">Registre des électeurs</p>
+        </div>
+      </div>
+
+      <nav class="topnav">
+        <a class="link-ghost" href="../admin/index.html">Accès administrateur</a>
+      </nav>
+    </header>
+
+    <section class="card form-card">
+      <div class="ticket">
+        <div class="ticket-main">
+          <h2 class="h2">Inscription électeur</h2>
+          <p class="hint">Renseignez vos informations pour rejoindre le registre électoral. Votre inscription sera vérifiée avant validation.</p>
+
+          <form id="registerForm" class="form" novalidate>
+            <div class="form-grid">
+              <div class="form-row">
+                <label for="firstName">Prénom</label>
+                <input id="firstName" name="firstName" required autocomplete="given-name" />
+              </div>
+
+              <div class="form-row">
+                <label for="lastName">Nom</label>
+                <input id="lastName" name="lastName" required autocomplete="family-name" />
+              </div>
+
+              <div class="form-row">
+                <label for="email">Adresse e‑mail</label>
+                <input id="email" name="email" type="email" required autocomplete="email" />
+              </div>
+
+              <div class="form-row">
+                <label for="nid">Numéro carte d'identité nationale</label>
+                <input id="nid" name="nid" required minlength="4" inputmode="numeric" />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" id="submitBtn" class="btn btn-primary">S'inscrire</button>
+              <button type="reset" class="btn btn-ghost">Effacer</button>
+            </div>
+
+            <p id="message" class="message" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="perforation" aria-hidden="true"></div>
+
+        <aside class="ticket-stub">
+          <span class="stub-label">Bulletin n°</span>
+          <span class="stub-number" id="stubNumber">— — — — —</span>
+
+          <div class="stamp-slot">
+            <div class="stamp" id="regStamp" aria-hidden="true">
+              <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4"/>
+                <path d="M32 52l12 12 24-26" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <p class="stub-note">Conservez une capture de cette page comme preuve de dépôt de votre demande.</p>
+        </aside>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <small>Développé avec soin • Pour usage de démonstration</small>
+    </footer>
+  </main>
+
+  <script type="module" src="js/voter.js"></script>
+</body>
+</html>

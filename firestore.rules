@@ -1,0 +1,25 @@
+// Règles Firestore d'exemple (v1) — ajuster en production
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // collection voters :
+    match /voters/{voterId} {
+      // Permettre la création publique (inscription), mais limiter lecture/modif/suppression aux admins
+      allow create: if true;
+      allow read, update, delete: if request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // collection admins : documents dont l'ID est equal au uid de l'admin
+    match /admins/{adminId} {
+      // Seuls les admins existants (bootstrap) peuvent lire ; écriture désactivée (créez via console)
+      allow read: if request.auth != null && request.auth.uid == adminId;
+      allow write: if false;
+    }
+
+    // Règle par défaut : rien
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

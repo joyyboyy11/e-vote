@@ -1,0 +1,266 @@
+/* ==========================================================================
+   E-Vote — CÔTÉ ÉLECTEUR
+   Identité : registre civique / bulletin officiel
+   Palette : encre navale + papier de bulletin + laiton (sceau)
+   Signature : billet à souche perforée avec tampon d'enregistrement
+   ========================================================================== */
+
+:root{
+  --ink-900:#131f38;
+  --ink-800:#1b2c4d;
+  --ink-700:#2a3f66;
+  --paper:#f2ecd9;
+  --paper-dim:#e8dfc4;
+  --paper-line:#d9cda9;
+  --ink-text:#1c2a42;
+  --muted:#726a58;
+  --muted-cool:#9fb0cc;
+  --brass:#a9812f;
+  --brass-light:#c79c46;
+  --civic-green:#2e6b52;
+  --radius:14px;
+  --shadow: 0 18px 40px rgba(19,31,56,0.28);
+  --shadow-soft: 0 8px 20px rgba(19,31,56,0.10);
+
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  color: var(--ink-text);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0) 0 0/22px 22px,
+    linear-gradient(180deg, var(--ink-900), #0e1830 70%, #0b1526);
+  min-height:100%;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding:40px 20px 60px;
+}
+
+.container{ width:100%; max-width:960px; }
+
+/* ---------- en-tête ---------- */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 22px;
+  margin-bottom:28px;
+  background:linear-gradient(180deg, var(--ink-800), var(--ink-900));
+  border:1px solid var(--ink-700);
+  border-radius:16px;
+  box-shadow: var(--shadow-soft);
+}
+
+.brand{ display:flex; align-items:center; gap:14px; }
+.logo{ display:block; flex:0 0 auto; }
+
+.brand-text .product{
+  margin:0;
+  font-family:"Fraunces", Georgia, serif;
+  font-weight:700;
+  font-size:1.5rem;
+  letter-spacing:0.01em;
+  color:#f4efe0;
+}
+.brand-text .tagline{
+  margin:2px 0 0;
+  font-size:0.8rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--muted-cool);
+}
+
+.topnav{ display:flex; align-items:center; gap:10px; }
+
+.link-ghost{
+  color:var(--muted-cool);
+  text-decoration:none;
+  font-size:0.9rem;
+  padding:9px 14px;
+  border:1px solid var(--ink-700);
+  border-radius:10px;
+  transition:border-color .15s ease, color .15s ease, background .15s ease;
+}
+.link-ghost:hover{ color:#f4efe0; border-color:var(--brass); background:rgba(169,129,47,0.12); }
+
+/* ---------- cartes ---------- */
+.card{
+  background:var(--paper);
+  border:1px solid var(--paper-line);
+  border-radius:var(--radius);
+  box-shadow: var(--shadow);
+  padding:0;
+  margin-bottom:20px;
+  overflow:hidden;
+}
+
+.h2{
+  font-family:"Fraunces", Georgia, serif;
+  font-weight:600;
+  font-size:1.3rem;
+  margin:0 0 4px;
+  color:var(--ink-text);
+}
+
+.hint{ margin:0 0 18px; color:var(--muted); font-size:0.92rem; }
+
+/* ---------- billet / souche ---------- */
+.ticket{ display:flex; align-items:stretch; }
+.ticket-main{ flex:1 1 auto; padding:28px 30px 26px; min-width:0; }
+
+.perforation{
+  position:relative;
+  flex:0 0 1px;
+  background-image: repeating-linear-gradient(180deg, var(--paper-line) 0 8px, transparent 8px 16px);
+  width:1px;
+}
+.perforation::before,
+.perforation::after{
+  content:"";
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  width:22px; height:22px; border-radius:50%;
+  background: var(--ink-900);
+}
+.perforation::before{ top:-11px; }
+.perforation::after{ bottom:-11px; }
+
+.ticket-stub{
+  flex:0 0 220px;
+  padding:28px 22px;
+  background:var(--paper-dim);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:10px;
+}
+.stub-label{
+  font-family:"IBM Plex Mono", monospace;
+  font-size:0.72rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.stub-number{
+  font-family:"IBM Plex Mono", monospace;
+  font-size:1.05rem;
+  font-weight:600;
+  letter-spacing:0.08em;
+  color:var(--ink-text);
+}
+
+.stamp-slot{
+  width:96px; height:96px;
+  display:flex; align-items:center; justify-content:center;
+  margin:6px 0;
+}
+.stamp{
+  width:92px; height:92px;
+  border-radius:50%;
+  border:3px dashed var(--muted);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0.35;
+  transform:rotate(-10deg) scale(0.9);
+  transition: opacity .35s ease, transform .35s ease;
+}
+.stamp svg{ width:70%; height:70%; }
+.stamp.stamped{
+  opacity:1;
+  border-color:var(--civic-green);
+  transform:rotate(-10deg) scale(1);
+  color:var(--civic-green);
+}
+.stub-note{ margin:4px 0 0; font-size:0.76rem; color:var(--muted); line-height:1.35; }
+
+/* ---------- formulaires ---------- */
+.form{ display:flex; flex-direction:column; gap:16px; }
+.form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px 18px; }
+
+.form-row{ display:flex; flex-direction:column; }
+.form-row label{
+  font-size:0.78rem;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:7px;
+}
+.form-row input, .form-row select, .form-row textarea{
+  padding:11px 13px;
+  border-radius:8px;
+  border:1px solid var(--paper-line);
+  font-size:0.96rem;
+  font-family:inherit;
+  background:#fbf8ef;
+  color:var(--ink-text);
+  transition:border-color .15s ease, box-shadow .15s ease;
+}
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus{
+  outline:none;
+  border-color:var(--brass);
+  box-shadow:0 0 0 3px rgba(169,129,47,0.18);
+}
+
+.form-actions{ display:flex; justify-content:flex-end; gap:10px; margin-top:2px; }
+
+/* ---------- boutons ---------- */
+.btn{
+  font-family:inherit;
+  border:0;
+  padding:11px 20px;
+  border-radius:9px;
+  font-weight:600;
+  font-size:0.92rem;
+  cursor:pointer;
+  transition:transform .1s ease, box-shadow .15s ease, background .15s ease, opacity .15s ease;
+}
+.btn:active{ transform:translateY(1px); }
+.btn:focus-visible{ outline:2px solid var(--brass); outline-offset:2px; }
+.btn:disabled{ opacity:0.6; cursor:default; }
+
+.btn-primary{
+  background:linear-gradient(180deg, #b58e3a, var(--brass));
+  color:#1b2a42;
+  box-shadow:0 6px 14px rgba(169,129,47,0.35);
+}
+.btn-primary:hover{ box-shadow:0 8px 18px rgba(169,129,47,0.45); }
+
+.btn-ghost{
+  background:transparent;
+  color:var(--ink-text);
+  border:1px solid var(--paper-line);
+}
+.btn-ghost:hover{ background:rgba(28,42,66,0.05); }
+
+.message{ margin:2px 0 0; color:var(--muted); font-size:0.9rem; min-height:1.2em; }
+.hidden{ display:none !important; }
+
+/* ---------- pied de page ---------- */
+.foot{ text-align:center; margin-top:6px; }
+.foot small{ color:var(--muted-cool); font-size:0.78rem; letter-spacing:0.03em; }
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  .ticket{ flex-direction:column; }
+  .perforation{
+    width:auto; height:1px; flex:0 0 1px;
+    background-image: repeating-linear-gradient(90deg, var(--paper-line) 0 8px, transparent 8px 16px);
+  }
+  .perforation::before,.perforation::after{ top:50%; transform:translateY(-50%); }
+  .perforation::before{ left:-11px; }
+  .perforation::after{ left:auto; right:-11px; }
+  .ticket-stub{ flex:0 0 auto; flex-direction:row; justify-content:space-between; text-align:left; padding:18px 22px; }
+  .stamp-slot{ margin:0; }
+  .form-grid{ grid-template-columns:1fr; }
+  .topbar{ flex-direction:column; align-items:flex-start; gap:12px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ transition:none !important; animation:none !important; }
+}
